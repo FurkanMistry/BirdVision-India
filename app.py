@@ -77,7 +77,7 @@ os.makedirs(UPLOAD_FOLDER_IMG, exist_ok=True)
 if 'vision_model' not in globals() or vision_model is None:
     vision_model = get_roboflow_model(
         model_id="birdvision-india/4",
-        api_key="SwZPL9CiE1cRQ5i2YS7C"
+        api_key=api_key
     )
 
 def allowed_file(filename, allowed_extensions):
