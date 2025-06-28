@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Real-Time Detection{% endblock %}
+{% block content %}
+<style>
+    .realtime-container {
+        max-width: 400px;
+        margin: 0 auto;
+        margin-top: 60px;
+        text-align: center;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .realtime-container button {
+        padding: 10px 20px;
+        margin: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+    }
+    #startBtn {
+        background-color: #4CAF50;
+        color: white;
+    }
+    #stopBtn {
+        background-color: #f44336;
+        color: white;
+    }
+</style>
+<div class="realtime-container">
+    <h1>Bird Detection</h1>
+    <p>Press 'q' to close the camera window</p>
+    <button id="startBtn" onclick="startVideo()">Start Detection</button>
+    <button id="stopBtn" onclick="stopVideo()">Stop Detection</button>
+</div>
+<script>
+    function startVideo() {
+        fetch('/start_video');
+    }
+    function stopVideo() {
+        fetch('/stop_video');
+    }
+</script>
+{% endblock %} 

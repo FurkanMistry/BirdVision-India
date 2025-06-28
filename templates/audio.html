@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Audio Detection{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <div class="card p-4">
+            <h2 class="h5 text-center mb-4">Bird Sound Classifier</h2>
+            <form id="audio-upload-form" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="audio-file" class="form-label">Upload Audio File</label>
+                    <input type="file" class="form-control" id="audio-file" accept=".wav,.mp3,.ogg" required>
+                    <div class="form-text">Allowed formats: WAV, MP3, OGG</div>
+                </div>
+                <div class="d-flex justify-content-center gap-2 mb-3">
+                    <button type="submit" class="btn btn-success" id="submit-audio">Submit</button>
+                    <button type="reset" class="btn btn-secondary" id="reset-audio">Reset</button>
+                </div>
+            </form>
+            <div id="audio-preview-section" class="mb-3 d-none">
+                <h6>Audio Preview</h6>
+                <audio controls id="audio-preview" class="w-100"></audio>
+            </div>
+            <div id="audio-loading" class="text-center d-none">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2">Processing audio...</p>
+            </div>
+            <div id="audio-results" class="d-none">
+                <h6>Results</h6>
+                <div id="audio-prediction-result" class="mb-3"></div>
+                <div id="audio-prediction-bars" class="mb-3"></div>
+                <div id="audio-spectrograms"></div>
+            </div>
+            <div id="audio-error" class="alert alert-danger d-none"></div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='audio.js') }}"></script>
+{% endblock %} 

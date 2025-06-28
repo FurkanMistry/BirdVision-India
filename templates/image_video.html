@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Image/Video Detection{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card p-4">
+            <h2 class="h5 text-center mb-4">Bird Image/Video Detection</h2>
+            <div class="mb-3 text-center">
+                <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="detection-type" id="image-option" checked autocomplete="off">
+                    <label class="btn btn-outline-primary" for="image-option">Image Detection</label>
+                    <input type="radio" class="btn-check" name="detection-type" id="video-option" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="video-option">Video Detection</label>
+                </div>
+            </div>
+            <form id="image-video-upload-form" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="file-upload" class="form-label">Choose File</label>
+                    <input type="file" class="form-control" id="file-upload" accept=".jpg,.jpeg,.png,.gif,.mp4" required>
+                    <div class="form-text">Allowed: PNG, JPEG, JPG, GIF for images; MP4 for videos</div>
+                </div>
+                <div class="d-flex justify-content-center gap-2 mb-3">
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+                    <button type="reset" class="btn btn-secondary" id="reset-btn">Reset</button>
+                </div>
+            </form>
+            <div id="result-container" class="text-center d-none">
+                <h6 class="mb-3">Detection Result</h6>
+                <img id="result-image" class="img-fluid mb-3 rounded" style="max-height: 400px;">
+                <div id="detections-list" class="alert alert-info"></div>
+            </div>
+            <div id="loading" class="text-center d-none">
+                <div class="spinner-border text-primary" role="status"></div>
+                <p class="mt-2">Processing...</p>
+            </div>
+            <div id="error-message" class="alert alert-danger d-none"></div>
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='image_video.js') }}"></script>
+{% endblock %} 

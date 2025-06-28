@@ -1,0 +1,115 @@
+body {
+    background: #f9f9f9;
+    color: #2d2d2d;
+}
+.card, .feature-box {
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+}
+.navbar, .navbar-brand {
+    background: #3a86ff !important;
+    color: #fff !important;
+}
+.navbar .nav-link {
+    color: #fff !important;
+    transition: color 0.2s;
+}
+.navbar .nav-link:hover, .navbar .nav-link.active {
+    color: #219653 !important;
+    border-bottom: 2px solid #219653;
+}
+.btn-primary, .btn-outline-primary {
+    background: #3a86ff;
+    border-color: #3a86ff;
+    color: #fff;
+}
+.btn-outline-primary {
+    background: transparent;
+    color: #3a86ff;
+}
+.btn-outline-primary:hover, .btn-primary:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+.btn-success {
+    background: #219653;
+    border-color: #219653;
+}
+.btn-success:hover {
+    background: #17643a;
+    border-color: #17643a;
+}
+.btn-danger {
+    background: #e07a5f;
+    border-color: #e07a5f;
+}
+.btn-danger:hover {
+    background: #b85c44;
+    border-color: #b85c44;
+}
+footer {
+    font-size: 0.95rem;
+    background: #fff;
+    border-top: 1px solid #e5e7eb;
+    color: #6c757d;
+}
+main.container {
+    background: transparent;
+}
+.section-title, .fw-bold.text-primary, .text-primary {
+    color: #3a86ff !important;
+}
+.text-success {
+    color: #219653 !important;
+}
+.text-danger, .fw-bold.text-danger {
+    color: #e07a5f !important;
+}
+.text-muted, .muted, .footer, .footer .text-muted {
+    color: #6c757d !important;
+}
+.text-info, .alert-info, .info-box, .mission-highlight {
+    background: #d0ebff !important;
+    color: #2d2d2d !important;
+    border-color: #d0ebff !important;
+}
+.alert-primary {
+    background: #d0ebff !important;
+    color: #2d2d2d !important;
+    border-color: #d0ebff !important;
+}
+.alert-danger {
+    background: #fff5f2;
+    color: #e07a5f;
+    border-color: #e07a5f;
+}
+.table th, .table td {
+    border-color: #e5e7eb !important;
+}
+a, .link-highlight {
+    color: #3a86ff;
+    text-decoration: underline;
+}
+a:hover, .link-highlight:hover {
+    color: #219653;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f9f9f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #3a86ff;
+}
+@media (max-width: 576px) {
+    .navbar-brand { font-size: 1.1rem; }
+    main.container { padding: 1rem 0.2rem; }
+} 

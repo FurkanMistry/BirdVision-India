@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="py-5 mb-4" style="background: linear-gradient(90deg, #e3f2fd 60%, #fff 100%); border-radius: 1.5rem;">
+  <div class="container-fluid px-4">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h1 class="display-4 fw-bold mb-2">🕊️ BirdVision India</h1>
+        <p class="lead mb-3">Real-Time Bird Detection for Conservation and Environmental Awareness</p>
+        
+      </div>
+      <div class="col-md-4 text-center d-none d-md-block">
+        <img src="https://i.ibb.co/whbTXkVH/common.jpg" alt="Bird" class="img-fluid rounded shadow" style="max-width:250px; object-fit:cover;">
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission Banner -->
+<div class="alert alert-primary text-center mb-5" style="border-radius: 1rem; font-size:1.15rem;">
+  <strong>🎯 Our Mission:</strong> Promote bird conservation and ecological awareness through accessible, real-time species detection that blends visual and acoustic insights.
+</div>
+
+<!-- Features Section -->
+<h2 class="h5 text-center mb-4">What Can You Do with BirdVision India?</h2>
+<div class="row g-4 mb-5 justify-content-center">
+  <div class="col-md-4">
+    <div class="border rounded-3 p-4 h-100 text-center bg-white shadow-sm">
+      <div style="font-size:2.2rem;">🎙️</div>
+      <h6 class="fw-semibold mt-2">Audio-Based Bird Detection</h6>
+      <p class="small">Record or upload a bird call to identify species—even when birds are hidden or distant.</p>
+      <a href="/audio" class="btn btn-outline-primary btn-sm mt-2">Try Audio Detection</a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="border rounded-3 p-4 h-100 text-center bg-white shadow-sm">
+      <div style="font-size:2.2rem;">📸</div>
+      <h6 class="fw-semibold mt-2">Image & Video Bird Detection</h6>
+      <p class="small">Upload a photo, video, or use your camera for instant bird detection and classification.</p>
+      <a href="/image-video" class="btn btn-outline-primary btn-sm mt-2">Try Image/Video Detection</a>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="border rounded-3 p-4 h-100 text-center bg-white shadow-sm">
+      <div style="font-size:2.2rem;">🔁</div>
+      <h6 class="fw-semibold mt-2">Live Multimodal Bird Detection</h6>
+      <p class="small">Combine audio and visual input for highly accurate, real-time bird identification.</p>
+      <a href="/realtime" class="btn btn-outline-primary btn-sm mt-2">Try Real-Time Detection</a>
+    </div>
+  </div>
+</div>
+
+<!-- Map Visualization Section -->
+<div class="container-fluid px-4 mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h2 class="h5 text-center mb-4">Bird Species Distribution in India</h2>
+            <div class="map-container">
+                {{ map_html | safe }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Birds Section -->
+<div class="row g-4 mb-5">
+  <div class="col-md-6">
+    <div class="p-4 h-100" style="background: #fff5f2; border-radius: 1rem;">
+      <h6 class="fw-bold mb-3"><span style="font-size:1.2rem; vertical-align:middle; color:#e76f51;">🔴</span> High-Priority Birds</h6>
+      <ul class="list-unstyled mb-0">
+        <li class="mb-2"><span class="fw-bold text-danger">Common Greenshank</span> – Wetland degradation</li>
+        <li class="mb-2"><span class="fw-bold text-danger">Whiskered Tern</span> – Shrinking water bodies</li>
+        <li class="mb-2"><span class="fw-bold text-danger">Common Myna</span> – Urban environmental changes</li>
+        <li><span class="fw-bold text-danger">Little Ringed Plover</span> –  indicator of riverine and wetland disturbance</li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="p-4 h-100" style="background: #f6faef; border-radius: 1rem;">
+      <h6 class="fw-bold mb-3"><span style="font-size:1.2rem; vertical-align:middle; color:#7cb518;">🌿</span> Environmental Indicator Species</h6>
+      <ul class="list-unstyled mb-0">
+        <li class="mb-2"><span class="fw-bold text-success">Asian Koel</span> – Sensitive to urban habitat changes</li>
+        <li class="mb-2"><span class="fw-bold text-success">Rose-ringed Parakeet</span> – Urban ecosystem resilience</li>
+        <li class="mb-2"><span class="fw-bold text-success">Common Kingfisher</span> – Freshwater ecosystem health</li>
+        <li><span class="fw-bold text-success">Black Kite</span> – Urban scavenger health</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Did You Know Box -->
+<div class="alert alert-info d-flex align-items-center" style="border-radius: 1rem;">
+  <div style="font-size:2rem; margin-right:1rem;">🧠</div>
+  <div>
+    <strong>Did You Know?</strong> The <span class="fw-bold text-primary">Asian Koel</span>, famous for its loud and melodious call, is often heard before it's seen. Its presence signals green urban spaces, but it can vanish quickly if local vegetation is lost.
+  </div>
+</div>
+{% endblock %} 
