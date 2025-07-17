@@ -65,14 +65,22 @@ It aids in ecological research and biodiversity monitoring through a web-based a
 
 ---
 
-### Folder Structure
+## 📁 Folder Structure
+
+```bash
 BirdVision-India/
 ├── static/                          # Static assets (CSS, JS, images)
 ├── templates/                       # HTML templates for Flask
 ├── uploads/                         # Temporary file uploads
 ├── 8birds_final.ipynb              # Jupyter notebook for model training/testing
-├── BirdVision India.pbix           # Power BI report (dashboard/EDA)
-├── BirdVision_TestCases.xlsx       # Test cases (audio/image/multimodal)
+├── BirdVision India.pbix           # Power BI dashboard (EDA & insights)
+├── BirdVision_TestCases.xlsx       # Manual test cases for system validation
+├── README.md                       # Project documentation
+├── app.py                          # Flask application backend
+├── map.py                          # Optional script for map visualizations
+├── model_16_val_loss_0.1970.keras  # Trained EfficientNetB0 audio model
+├── train_metadata - Copy.csv       # Metadata for training/test datasets
+
 ├── README.md                       # Project README file
 ├── app.py                          # Flask app backend
 ├── map.py                          # Possibly used for geo-visualization
