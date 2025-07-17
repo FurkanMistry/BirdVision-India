@@ -2,8 +2,6 @@
 
 **A Real-Time Multimodal Bird Detection System for Conservation Monitoring in India**
 
-![BirdVision Logo](insert-your-logo-url-if-any)
-
 ## 📌 Project Overview
 
 **BirdVision India** is a research-driven multimodal AI system designed to detect and classify Indian bird species using both **audio and visual inputs**. Developed as part of the M.Sc. Big Data Analytics program at **St. Xavier’s College, Mumbai**, the project integrates state-of-the-art models like **EfficientNetB0** (for audio classification via spectrograms) and **YOLOv8** (for object detection in images and videos).
@@ -20,20 +18,6 @@ The system aims to support **biodiversity monitoring, ecological research, and c
 - 🔄 **Max Voting Strategy**: Robust prediction from chunked audio.
 - 🧭 **Interactive Web App**: Built with Flask and supports uploads + live webcam/mic inputs.
 - 🌍 **Conservation-Centric**: Focused on 8 Indian bird species selected based on the *State of India’s Birds 2023* report.
-
----
-
-## 🗂️ Folder Structure
-
-```bash
-BirdVision-India/
-├── audio_model/              # Trained EfficientNetB0 audio model
-├── visual_model/             # YOLOv8n weights or Roboflow integration
-├── web_app/                  # Flask application
-│   ├── static/
-│   ├── templates/
-│   └── app.py
-├── data/
 │   ├── images/
 │   └── audio/
 ├── notebooks/                # Jupyter notebooks for experiments
