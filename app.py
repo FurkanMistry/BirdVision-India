@@ -407,20 +407,102 @@ def image_video():
 def realtime():
     return render_template('realtime.html')
 
+# Health check endpoint
+@app.route('/health')
+def health_check():
+    """Health check endpoint for monitoring"""
+    try:
+        # Check if models are loaded
+        models_status = {
+            'audio_model': audio_model is not None,
+            'vision_model': vision_model is not None
+        }
+        
+        # Check upload directory
+        upload_dir_exists = os.path.exists(Config.UPLOAD_FOLDER)
+        
+        # Check required files
+        required_files = {
+            'audio_model_file': os.path.exists(Config.AUDIO_MODEL_PATH),
+            'metadata_file': os.path.exists(Config.METADATA_CSV_PATH)
+        }
+        
+        all_healthy = (
+            all(models_status.values()) and 
+            upload_dir_exists and 
+            all(required_files.values())
+        )
+        
+        status_code = 200 if all_healthy else 503
+        
+        return jsonify({
+            'status': 'healthy' if all_healthy else 'unhealthy',
+            'models': models_status,
+            'upload_directory': upload_dir_exists,
+            'required_files': required_files,
+            'timestamp': pd.Timestamp.now().isoformat()
+        }), status_code
+        
+    except Exception as e:
+        logger.error(f"Health check failed: {e}")
+        return jsonify({
+            'status': 'unhealthy',
+            'error': str(e),
+            'timestamp': pd.Timestamp.now().isoformat()
+        }), 503
+
 @app.route('/start_video')
 def start_video():
+    """Start real-time video detection"""
     global video_running
-    if not video_running:
+    
+    try:
+        if video_running:
+            return jsonify({"status": "already_running", "message": "Video detection is already running"})
+        
+        # Ensure models are loaded
+        if vision_model is None or audio_model is None:
+            load_models()
+        
         video_running = True
-        thread = threading.Thread(target=main_detection)
+        thread = threading.Thread(target=main_detection, daemon=True)
         thread.start()
-    return jsonify({"status": "success"})
+        
+        logger.info("Video detection started")
+        return jsonify({"status": "success", "message": "Video detection started"})
+        
+    except Exception as e:
+        logger.error(f"Failed to start video detection: {e}")
+        video_running = False
+        return jsonify({"status": "error", "message": f"Failed to start: {str(e)}"})
 
 @app.route('/stop_video')
 def stop_video():
+    """Stop real-time video detection"""
     global video_running
-    video_running = False
-    return jsonify({"status": "success"})
+    
+    try:
+        if not video_running:
+            return jsonify({"status": "already_stopped", "message": "Video detection is not running"})
+        
+        video_running = False
+        logger.info("Video detection stopped")
+        return jsonify({"status": "success", "message": "Video detection stopped"})
+        
+    except Exception as e:
+        logger.error(f"Error stopping video detection: {e}")
+        return jsonify({"status": "error", "message": f"Error stopping: {str(e)}"})
+
+@app.route('/video_status')
+def video_status():
+    """Get current video detection status"""
+    return jsonify({
+        "running": video_running,
+        "models_loaded": {
+            "audio": audio_model is not None,
+            "vision": vision_model is not None
+        }
+    })
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
@@ -595,7 +677,82 @@ def process_video():
             except Exception as e:
                 logger.warning(f"Could not remove temp file {video_path}: {e}")
 
+@app.route('/api/docs')
+def api_docs():
+    """Simple API documentation"""
+    docs = {
+        "name": "BirdVision India API",
+        "version": "1.0.0",
+        "description": "Bird detection API using audio and visual inputs",
+        "endpoints": {
+            "/": {
+                "method": "GET",
+                "description": "Home page with species map",
+                "returns": "HTML page"
+            },
+            "/health": {
+                "method": "GET", 
+                "description": "Health check endpoint",
+                "returns": "JSON with system status"
+            },
+            "/predict": {
+                "method": "POST",
+                "description": "Audio bird detection",
+                "parameters": {
+                    "audio": "Audio file (wav, mp3, ogg, flac)"
+                },
+                "returns": "JSON with predictions and confidence scores"
+            },
+            "/process_image": {
+                "method": "POST",
+                "description": "Image bird detection",
+                "parameters": {
+                    "file": "Image file (png, jpg, jpeg, gif)"
+                },
+                "returns": "JSON with detection results and annotated image path"
+            },
+            "/process_video": {
+                "method": "POST",
+                "description": "Video bird detection",
+                "parameters": {
+                    "file": "Video file (mp4, avi, mov)"
+                },
+                "returns": "JSON with detection summary"
+            },
+            "/start_video": {
+                "method": "GET",
+                "description": "Start real-time detection",
+                "returns": "JSON status"
+            },
+            "/stop_video": {
+                "method": "GET",
+                "description": "Stop real-time detection", 
+                "returns": "JSON status"
+            },
+            "/video_status": {
+                "method": "GET",
+                "description": "Get real-time detection status",
+                "returns": "JSON with current status"
+            }
+        },
+        "bird_species": Config.BIRD_CLASSES,
+        "supported_formats": {
+            "audio": list(Config.ALLOWED_AUDIO_EXTENSIONS),
+            "image": list(Config.ALLOWED_IMAGE_EXTENSIONS),
+            "video": list(Config.ALLOWED_VIDEO_EXTENSIONS)
+        }
+    }
+    return jsonify(docs)
+
 if __name__ == '__main__':
+    # Initialize models on startup in production
+    if not app.debug:
+        try:
+            load_models()
+        except Exception as e:
+            logger.error(f"Failed to load models on startup: {e}")
+    
+    app.run(debug=True, threaded=True, host='0.0.0.0', port=5000)
     # Initialize models on startup in production
     if not app.debug:
         try:
