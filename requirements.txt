@@ -1,0 +1,13 @@
+flask>=2.3.0
+opencv-python>=4.8.0
+supervision>=0.15.0
+numpy>=1.24.0
+tensorflow>=2.13.0
+librosa>=0.10.0
+matplotlib>=3.7.0
+Pillow>=10.0.0
+plotly>=5.15.0
+pandas>=2.0.0
+pyaudio>=0.2.11
+inference>=0.9.0
+werkzeug>=2.3.0
