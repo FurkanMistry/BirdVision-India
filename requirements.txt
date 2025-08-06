@@ -7,8 +7,8 @@ tensorflow
 librosa
 matplotlib
 Pillow
-tempfile
 plotly
 pandas
 werkzeug
 gunicorn
+
