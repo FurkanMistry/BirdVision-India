@@ -1,0 +1,14 @@
+flask
+opencv-python
+supervision
+numpy
+pyaudio
+tensorflow
+librosa
+matplotlib
+Pillow
+tempfile
+plotly
+pandas
+werkzeug
+gunicorn
