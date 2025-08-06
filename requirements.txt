@@ -11,4 +11,6 @@ plotly
 pandas
 werkzeug
 gunicorn
+inference
+roboflow
 
